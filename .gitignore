@@ -1,0 +1,14 @@
+# Dependencias
+node_modules/
+
+# Archivos de configuración
+.env
+
+# Archivos de construcción
+build/
+dist/
+
+# Logs y archivos temporales
+logs/
+*.log
+*.tmp
