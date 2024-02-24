@@ -19,8 +19,8 @@ module.exports = {
 
     agregar: (datos, callBack) => {
         coneccion.query(
-            `insert into usuario (usuario, contra, rol_id) values ( ? , ? , ?)`,
-            [datos.usuario, sha256(datos.contra), datos.rol_id],
+            `insert into usuario (nombre,usuario, contra, rol_id) values (?, ? , ? , ?)`,
+            [datos.nombre,datos.usuario, sha256(datos.contra), datos.rol_id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -29,10 +29,22 @@ module.exports = {
             }
         );
     },
-    borrar: (datos, callBack) => {
+    borrar: (userId, callBack) => {
         coneccion.query(
             `delete from usuario where id=?`,
-            [datos.id],
+            [userId],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    encontrar: (userId, callBack) => {
+        coneccion.query(
+            `select * from usuario where id=?`,
+            [userId],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -43,8 +55,8 @@ module.exports = {
     },
     actualiza: (datos, callBack) => {
         coneccion.query(
-            `update usuario set usuario= ?, contra =?, rol_id=? where id = ?`,
-            [datos.usuario,sha256(datos.contra), datos.rol_id, datos.id],
+            `update usuario set nombre=?, usuario= ?, contra =?, rol_id=? where id = ?`,
+            [datos.nombre, datos.usuario,sha256(datos.contra), datos.rol_id, datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
