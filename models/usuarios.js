@@ -43,7 +43,7 @@ module.exports = {
     },
     encontrar: (userId, callBack) => {
         coneccion.query(
-            `select * from usuario where id=?`,
+            `select u.nombre as nombre_usuario,u.usuario,u.rol_id, r.nombre as nombre_rol  from usuario as u join rol_usuario as r on u.rol_id=r.id  where u.id=?`,
             [userId],
             (error, results, fields) => {
                 if (error) {
