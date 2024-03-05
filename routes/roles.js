@@ -7,6 +7,8 @@ router.get('/listado',cRol.listado);
 router.post('/agregar', cRol.agrega);
 router.delete('/borrar', cRol.borrar);
 router.put('/actualizar', cRol.actualiza);
+router.get('/encontrar/:id', cRol.encontrar);
+
 
 
 module.exports = router;

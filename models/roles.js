@@ -47,5 +47,17 @@ module.exports = {
                 return callBack(null, results);
             }
         );
+    },
+    encontrar: (rolId, callBack) => {
+        coneccion.query(
+            `select * from rol_usuario where id=?`,
+            [rolId],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
     }
 }

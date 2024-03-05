@@ -60,6 +60,23 @@ module.exports = {
                 data: results
             });
         });
+    },
+    encontrar: (req, res) => {
+        const rolId = req.params.id; // Obtener el ID de la URL
+        console.log(rolId);
+        modelRol.encontrar(rolId, (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Error en la Base de Datos"
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results[0]
+            });
+        });
     }
 
 };
