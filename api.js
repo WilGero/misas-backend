@@ -23,5 +23,6 @@ app.post('/', (req, res) => {
 // ruta para usuarios
 app.use('/usuarios', require('./routes/usuarios.js'));
 // ruta para roles de usuario
-
 app.use('/roles', require('./routes/roles.js'));
+// ruta para tipos de misa
+app.use('/tiposmisa', require('./routes/tipoMisas.js'))
