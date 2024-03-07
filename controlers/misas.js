@@ -1,7 +1,7 @@
-const modelTipoI = require('../models/tipoMisas');
+const modelMisa = require('../models/misas');
 module.exports = {
     listado: (req, res) => {
-        modelTipoI.listado((err, results) => {
+        modelMisa.listado((err, results) => {
             if (err) {
                 console.log(err);
                 return;
@@ -15,7 +15,7 @@ module.exports = {
     },
     agrega: (req, res) => {
         const body = req.body;
-        modelTipoI.agregar(body, (err, results) => {
+        modelMisa.agregar(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -30,8 +30,8 @@ module.exports = {
         });
     },
     borrar: (req, res) => {
-        const id= req.params.id;
-        modelTipoI.borrar(id, (err, results) => {
+        const misaId = req.params.id;
+        modelMisa.borrar(misaId, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -47,7 +47,7 @@ module.exports = {
     },
     actualiza: (req, res) => {
         const body = req.body;
-        modelTipoI.actualiza(body, (err, results) => {
+        modelMisa.actualiza(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -64,7 +64,7 @@ module.exports = {
     encontrar: (req, res) => {
         const rolId = req.params.id; // Obtener el ID de la URL
         console.log(rolId);
-        modelTipoI.encontrar(rolId, (err, results) => {
+        modelMisa.encontrar(rolId, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

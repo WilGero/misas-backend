@@ -2,7 +2,7 @@ const coneccion = require("../database");
 module.exports = {
     listado: callBack => {
         coneccion.query(
-            `select * from rol_usuario`,
+            `select * from misa`,
             [],
             (error, results, fields) => {
                 if (error) {
@@ -14,8 +14,8 @@ module.exports = {
     },
     agregar: (datos, callBack) => {
         coneccion.query(
-            `insert into rol_usuario (nombre) values ( ? )`,
-            [datos.nombre],
+            `insert into misa (fecha,tipo_misa_id,usuario_id) values ( ? , ? , ? )`,
+            [datos.fecha,datos.tipoMisaId,datos.usuarioId],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -24,10 +24,10 @@ module.exports = {
             }
         );
     },
-    borrar: (datos, callBack) => {
+    borrar: (misaId, callBack) => {
         coneccion.query(
-            `delete from rol_usuario where id=?`,
-            [datos.id],
+            `delete from misa where id=?`,
+            [misaId],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -38,8 +38,8 @@ module.exports = {
     },
     actualiza: (datos, callBack) => {
         coneccion.query(
-            `update rol_usuario set nombre= ? where id = ?`,
-            [datos.nombre,datos.id],
+            `update misa set fecha = ?,tipo_misa_id = ?,usuario_id = ? where id = ?`,
+            [datos.fecha,datos.tipoMisaId,datos.usuarioId, datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -48,10 +48,10 @@ module.exports = {
             }
         );
     },
-    encontrar: (rolId, callBack) => {
+    encontrar: (misaId, callBack) => {
         coneccion.query(
-            `select * from rol_usuario where id=?`,
-            [rolId],
+            `select * from misa where id=?`,
+            [misaId],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);

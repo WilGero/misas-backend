@@ -24,10 +24,10 @@ module.exports = {
             }
         );
     },
-    borrar: (datos, callBack) => {
+    borrar: (rolId, callBack) => {
         coneccion.query(
             `delete from rol_usuario where id=?`,
-            [datos.id],
+            [rolId],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);

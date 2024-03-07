@@ -24,10 +24,10 @@ module.exports = {
             }
         );
     },
-    borrar: (datos, callBack) => {
+    borrar: (id, callBack) => {
         coneccion.query(
             `delete from tipo_misa where id=?`,
-            [datos.id],
+            [id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);

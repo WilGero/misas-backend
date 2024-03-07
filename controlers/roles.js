@@ -30,8 +30,8 @@ module.exports = {
         });
     },
     borrar: (req, res) => {
-        const body = req.body;
-        modelRol.borrar(body, (err, results) => {
+        const rolId = req.params.id;
+        modelRol.borrar(rolId, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

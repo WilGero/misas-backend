@@ -5,7 +5,7 @@ const auth = require('../auth');
 
 router.get('/listado',cTipoI.listado);
 router.post('/agregar', cTipoI.agrega);
-router.delete('/borrar', cTipoI.borrar);
+router.delete('/borrar/:id', cTipoI.borrar);
 router.put('/actualizar', cTipoI.actualiza);
 router.get('/encontrar/:id', cTipoI.encontrar);
 
