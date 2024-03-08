@@ -30,3 +30,5 @@ app.use('/tiposmisa', require('./routes/tipoMisas.js'));
 app.use('/misas', require('./routes/misas.js'));
 // ruta para tipos de intencion
 app.use('/tiposintencion', require('./routes/tiposIntencion.js'));
+// ruta para tipos de intencion
+app.use('/intenciones', require('./routes/intenciones.js'));
