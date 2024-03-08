@@ -39,7 +39,7 @@ module.exports = {
     actualiza: (datos, callBack) => {
         coneccion.query(
             `update tipo_misa set tipo_misa= ? where id = ?`,
-            [datos.tipoMisa,datos.id],
+            [datos.tipo_misa,datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
