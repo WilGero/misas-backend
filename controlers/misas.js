@@ -62,9 +62,9 @@ module.exports = {
         });
     },
     encontrar: (req, res) => {
-        const rolId = req.params.id; // Obtener el ID de la URL
-        console.log(rolId);
-        modelMisa.encontrar(rolId, (err, results) => {
+        const misaId = req.params.id; // Obtener el ID de la URL
+        console.log(misaId);
+        modelMisa.encontrar(misaId, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

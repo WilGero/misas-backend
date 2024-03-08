@@ -25,6 +25,8 @@ app.use('/usuarios', require('./routes/usuarios.js'));
 // ruta para roles de usuario
 app.use('/roles', require('./routes/roles.js'));
 // ruta para tipos de misa
-app.use('/tiposmisa', require('./routes/tipoMisas.js'))
+app.use('/tiposmisa', require('./routes/tipoMisas.js'));
 // ruta para misas
-app.use('/misas', require('./routes/misas.js'))
+app.use('/misas', require('./routes/misas.js'));
+// ruta para tipos de intencion
+app.use('/tiposintencion', require('./routes/tiposIntencion.js'));

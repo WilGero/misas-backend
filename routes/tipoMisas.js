@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const cTipoI = require("../controlers/tipoMisas");
+const cTipoM = require("../controlers/tipoMisas");
 const auth = require('../auth');
 
-router.get('/listado',cTipoI.listado);
-router.post('/agregar', cTipoI.agrega);
-router.delete('/borrar/:id', cTipoI.borrar);
-router.put('/actualizar', cTipoI.actualiza);
-router.get('/encontrar/:id', cTipoI.encontrar);
+router.get('/listado',cTipoM.listado);
+router.post('/agregar', cTipoM.agrega);
+router.delete('/borrar/:id', cTipoM.borrar);
+router.put('/actualizar', cTipoM.actualiza);
+router.get('/encontrar/:id', cTipoM.encontrar);
 
 
 
