@@ -18,9 +18,12 @@ pool.getConnection((err, connection) => {
         if (err.code === 'ECONNREFUSED') {
             console.error('La coneccion con la BDD fue rechazada');
         }
+        console.log('No se pudo conectar con la base de datos');
+    }else{
+        if (connection) connection.release();
+        console.log('Se ha conectado a la BdD!!');
+        return;
     }
-    if (connection) connection.release();
-    console.log('Se ha conectado a la BdD!!');
-    return;
+
 });
 module.exports = pool;
