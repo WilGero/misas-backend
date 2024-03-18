@@ -65,7 +65,7 @@ module.exports = {
     },
     actualizaEstadoPago: (datos, callBack) => {
         coneccion.query(
-            `update intencion set estado_pago = ? where id = ?`,
+            `update lista_intenciones set estado_pago = ? where id = ?`,
             [datos.estado_pago, datos.id],
             (error, results, fields) => {
                 if (error) {
