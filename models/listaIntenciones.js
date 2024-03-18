@@ -2,7 +2,22 @@ const coneccion = require("../database");
 module.exports = {
     listado: callBack => {
         coneccion.query(
-            `select * from intencion`,
+            `select * from lista_intenciones`,
+            [],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    listarUltimo: callBack => {
+        // funcion que lista el dato agregado
+        coneccion.query(
+            `SELECT * FROM lista_intenciones
+            ORDER BY id DESC
+            LIMIT 1;`,
             [],
             (error, results, fields) => {
                 if (error) {
@@ -14,8 +29,8 @@ module.exports = {
     },
     agregar: (datos, callBack) => {
         coneccion.query(
-            `insert into intencion (razon, descripcion, misa_id, tipo_intencion_id, usuario_id, lista_id) values ( ? ,?, ?,?,? ,? )`,
-            [datos.razon, datos.descripcion, datos.misa_id, datos.tipo_intencion_id, datos.usuario_id, datos.lista_id],
+            `insert into lista_intenciones (estado_pago) values ( 0 )`,
+            [],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -26,7 +41,7 @@ module.exports = {
     },
     borrar: (id, callBack) => {
         coneccion.query(
-            `delete from intencion where id=?`,
+            `delete from lista_intenciones where id=?`,
             [id],
             (error, results, fields) => {
                 if (error) {
@@ -38,8 +53,8 @@ module.exports = {
     },
     actualiza: (datos, callBack) => {
         coneccion.query(
-            `update intencion set razon = ?,descripcion = ?, tipo_intencion_id=? where id = ?`,
-            [datos.razon, datos.descripcion, datos.tipo_intencion_id,  datos.id],
+            `update intencion set razon = ?,descripcion = ?,estado_pago=?, misa_id=?, tipo_intencion_id=?, usuario_id=? where id = ?`,
+            [datos.razon, datos.descripcion, datos.estado_pago, datos.misa_id, datos.tipo_intencion_id, datos.usuario_id, datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -62,7 +77,7 @@ module.exports = {
     },
     encontrar: (id, callBack) => {
         coneccion.query(
-            `call obtener_intencion_personalizada(?);`,
+            `call obtener_intenciones(?);`,
             [id],
             (error, results, fields) => {
                 if (error) {

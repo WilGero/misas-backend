@@ -34,3 +34,5 @@ app.use('/tiposintencion', require('./routes/tiposIntencion.js'));
 app.use('/intenciones', require('./routes/intenciones.js'));
 // ruta para payments
 app.use('/pagos', require('./routes/payments.js'));
+// ruta para lista de intenciones
+app.use('/lista-intenciones', require('./routes/listaIntenciones.js'));
