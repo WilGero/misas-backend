@@ -77,6 +77,23 @@ module.exports = {
                 data: results[0]
             });
         });
+    },
+    encontrarIntencionesMisa: (req, res) => {
+        const misaId = req.params.id; // Obtener el ID de la URL
+        console.log(misaId);
+        modelMisa.encontrarIntencionesMisa(misaId, (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Error en la Base de Datos"
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results
+            });
+        });
     }
 
 };

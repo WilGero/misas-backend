@@ -58,7 +58,7 @@ module.exports = {
                                 description: itemDetails[i].descripcion
                         },
                         currency: 'usd',
-                            unit_amount: itemDetails[i].costo * 10,
+                            unit_amount: itemDetails[i].costo *10,
                     },
                     quantity: 1
                 }

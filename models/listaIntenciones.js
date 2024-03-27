@@ -2,7 +2,14 @@ const coneccion = require("../database");
 module.exports = {
     listado: callBack => {
         coneccion.query(
-            `select * from lista_intenciones`,
+            `select li.id,i.razon ,li.estado_pago,li.created_at,m.id misa_id,m.estado estado_misa,
+             m.fecha, tm.tipo_misa, i.usuario_id, i.estado_pago pago_intencion
+            from lista_intenciones li
+                        inner join intencion i on li.id=i.lista_id
+                        inner join misa m on i.misa_id=m.id
+                        inner join tipo_misa tm on tm.id=m.tipo_misa_id
+                        GROUP BY li.id
+                        ORDER BY li.created_at ASC;`,
             [],
             (error, results, fields) => {
                 if (error) {

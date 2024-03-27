@@ -6,7 +6,7 @@ function sha256(string) {
 module.exports = {
     listado: callBack => {
         coneccion.query(
-            `select * from usuario`,
+            `select id,usuario,email,nombre,rol_id from usuario`,
             [],
             (error, results, fields) => {
                 if (error) {
@@ -55,8 +55,8 @@ module.exports = {
     },
     actualiza: (datos, callBack) => {
         coneccion.query(
-            `update usuario set nombre=?, usuario= ?, contra =?, rol_id=? where id = ?`,
-            [datos.nombre, datos.usuario,sha256(datos.contra), datos.rol_id, datos.id],
+            `update usuario set nombre=?, usuario= ?, rol_id=? where id = ?`,
+            [datos.nombre, datos.usuario, datos.rol_id, datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
