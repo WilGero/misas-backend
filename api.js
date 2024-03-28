@@ -36,3 +36,5 @@ app.use('/intenciones', require('./routes/intenciones.js'));
 app.use('/pagos', require('./routes/payments.js'));
 // ruta para lista de intenciones
 app.use('/lista-intenciones', require('./routes/listaIntenciones.js'));
+//ruta para catecumenso
+app.use('/catecumenos', require('./routes/catequesis/catecumenos.js'));

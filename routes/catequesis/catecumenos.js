@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const cCatecumeno = require("../../controlers/catequesis/catecumenos");
+const auth = require('../../auth');
+router.get('/listado', cCatecumeno.listado);
+router.post('/agregar', cCatecumeno.agrega);
+router.delete('/borrar/:id', cCatecumeno.borrar);
+router.get('/encontrar/:id', cCatecumeno.encontrar);
+router.put('/actualizar', cCatecumeno.actualiza);
+
+module.exports = router;
