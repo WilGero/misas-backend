@@ -14,10 +14,10 @@ module.exports = {
     },
     agregar: (datos, callBack) => {
         coneccion.query(
-            `insert into catecumeno (nombres,apellidos,ci,fecha_nacimiento,celular,direccion,padrinos,usuario_id) 
-            values (?, ? , ? , ?,?,?,?,? )`,
+            `insert into catecumeno (nombres,apellidos,ci,fecha_nacimiento,celular,celular2,direccion,padrinos,usuario_id) 
+            values (?, ? , ? , ?,?,?,?,?,?)`,
             [datos.nombres,datos.apellidos, datos.ci, datos.fecha_nacimiento, 
-                datos.celular,datos.direccion,datos.padrinos,datos.usuario_id],
+                datos.celular,datos.celular2,datos.direccion,datos.padrinos,datos.usuario_id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
