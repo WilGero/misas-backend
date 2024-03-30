@@ -30,8 +30,8 @@ module.exports = {
         });
     },
     borrar: (req, res) => {
-        const misaId = req.params.id;
-        modelCatecumeno.borrar(misaId, (err, results) => {
+        const id = req.params.id;
+        modelCatecumeno.borrar(id, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -62,9 +62,9 @@ module.exports = {
         });
     },
     encontrar: (req, res) => {
-        const misaId = req.params.id; // Obtener el ID de la URL
-        console.log(misaId);
-        modelCatecumeno.encontrar(misaId, (err, results) => {
+        const id = req.params.id; // Obtener el ID de la URL
+        console.log(id);
+        modelCatecumeno.encontrar(id, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

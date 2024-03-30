@@ -26,10 +26,10 @@ module.exports = {
             }
         );
     },
-    borrar: (misaId, callBack) => {
+    borrar: (id, callBack) => {
         coneccion.query(
-            `delete from misa where id=?`,
-            [misaId],
+            `delete from catecumeno where id=?`,
+            [id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -40,8 +40,10 @@ module.exports = {
     },
     actualiza: (datos, callBack) => {
         coneccion.query(
-            `update misa set descripcion=?, fecha = ?,tipo_misa_id = ?,usuario_id = ? where id = ?`,
-            [datos.descripcion, datos.fecha, datos.tipo_misa_id, datos.usuario_id, datos.id],
+            `update catecumeno set nombres=?,apellidos=?,ci=?,fecha_nacimiento=?,celular=?,celular2=?,direccion=?,
+            padrinos=?,usuario_id = ? where id = ?`,
+            [datos.nombres,datos.apellidos, datos.ci, datos.fecha_nacimiento, 
+                datos.celular,datos.celular2,datos.direccion,datos.padrinos,datos.usuario_id,datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -50,14 +52,11 @@ module.exports = {
             }
         );
     },
-    encontrar: (misaId, callBack) => {
+    encontrar: (id, callBack) => {
         coneccion.query(
-            `select m.id, m.descripcion, m.estado, m.fecha,m.tipo_misa_id,m.usuario_id,
-                tm.tipo_misa
-             from misa m
-            inner join tipo_misa tm on m.tipo_misa_id=tm.id
-            where m.id=?`,
-            [misaId],
+            `select * from catecumeno 
+            where id=?;`,
+            [id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
