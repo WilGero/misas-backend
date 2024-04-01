@@ -40,3 +40,5 @@ app.use('/lista-intenciones', require('./routes/listaIntenciones.js'));
 app.use('/catecumenos', require('./routes/catequesis/catecumenos.js'));
 //ruta para catequesis
 app.use('/catequesis', require('./routes/catequesis/catequesis.js'));
+//ruta para clases
+app.use('/clases', require('./routes/catequesis/clases.js'));
