@@ -42,3 +42,5 @@ app.use('/catecumenos', require('./routes/catequesis/catecumenos.js'));
 app.use('/catequesis', require('./routes/catequesis/catequesis.js'));
 //ruta para clases
 app.use('/clases', require('./routes/catequesis/clases.js'));
+//ruta para asistencias
+app.use('/asistencias', require('./routes/catequesis/asistencias.js'));
