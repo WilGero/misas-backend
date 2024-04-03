@@ -51,8 +51,9 @@ module.exports = {
     },
     encontrar: (id, callBack) => {
         coneccion.query(
-            `select * from clase 
-            where id=?;`,
+            `select cl.id, cl.tema,cl.fecha_hora,cl.descripcion,cl.observaciones,cl.catequesis_id,ctq.nombre from clase cl
+            inner join catequesis ctq on cl.catequesis_id=ctq.id 
+            where cl.id=?;`,
             [id],
             (error, results, fields) => {
                 if (error) {
