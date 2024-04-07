@@ -13,6 +13,20 @@ module.exports = {
             });
         });
     },
+    listado2: (req, res) => {
+        const id = req.params.id; // Obtener el ID de la URL
+        modelCatecumeno.listado2(id,(err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(results);
+            return res.json({
+                success: 1,
+                data: results
+            });
+        });
+    },
     agrega: (req, res) => {
         const body = req.body;
         modelCatecumeno.agregar(body, (err, results) => {

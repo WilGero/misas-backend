@@ -2,7 +2,10 @@ const coneccion = require("../../database");
 module.exports = {
     listado: callBack => {
         coneccion.query(
-            `select * from catecumeno_clase;`,
+            `SELECT ctcls.id,ctcls.asistencia_id,ctcls.clase_id,ctcls.catecumeno_id,a.tipo
+            FROM catecumeno_clase ctcls 
+            inner join asistencia a on a.id=ctcls.asistencia_id
+            right join catecumeno ctc on ctc.id=ctcls.catecumeno_id;`,
             [],
             (error, results, fields) => {
                 if (error) {
@@ -39,8 +42,8 @@ module.exports = {
     },
     actualiza: (datos, callBack) => {
         coneccion.query(
-            `update catecumeno_clase set asistencia_id=?,clase_id=?,catecumeno_id=? where id = ?`,
-            [datos.asistencia_id,datos.clase_id,datos.catecumeno_id,datos.id],
+            `update catecumeno_clase set asistencia_id=?,clase_id=? where catecumeno_id=?`,
+            [datos.asistencia_id,datos.clase_id,datos.catecumeno_id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);

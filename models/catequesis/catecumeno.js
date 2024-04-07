@@ -2,8 +2,30 @@ const coneccion = require("../../database");
 module.exports = {
     listado: callBack => {
         coneccion.query(
-            `select * from catecumeno;`,
+            `select ctc.id,ctc.nombres,ctc.apellidos,ctc.ci,ctc.fecha_nacimiento,
+            ctc.celular,ctcls.asistencia_id,ctcls.clase_id
+            from catecumeno ctc
+            left join catecumeno_clase ctcls on ctcls.catecumeno_id=ctc.id
+            order by ctc.apellidos;`,
             [],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    // listado de catecumenos de una clase especifica
+    listado2: (idClase,callBack) => {
+        coneccion.query(
+            `select ctc.id,ctc.nombres,ctc.apellidos,ctc.ci,ctc.fecha_nacimiento,
+            ctc.celular,ctcls.asistencia_id 
+            from catecumeno ctc
+            inner join catecumeno_clase ctcls on ctcls.catecumeno_id=ctc.id
+            where ctcls.clase_id=?
+            order by ctc.apellidos;`,
+            [idClase],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -54,8 +76,11 @@ module.exports = {
     },
     encontrar: (id, callBack) => {
         coneccion.query(
-            `select * from catecumeno 
-            where id=?;`,
+            `select ctc.id,ctc.nombres,ctc.apellidos,ctc.ci,ctc.fecha_nacimiento,ctc.celular,ctc.celular2,
+            ctc.direccion,ctc.padrinos,ctc.usuario_id,ctcl.asistencia_id
+            from catecumeno ctc
+            left join catecumeno_clase ctcl on ctcl.catecumeno_id=ctc.id
+            where ctc.id=?;`,
             [id],
             (error, results, fields) => {
                 if (error) {

@@ -74,14 +74,14 @@ module.exports = {
             }
             return res.status(200).json({
                 success: 1,
-                data: results[0]
+                data: results
             });
         });
     },
-    encontrarIntencionesMisa: (req, res) => {
-        const misaId = req.params.id; // Obtener el ID de la URL
-        console.log(misaId);
-        modelClase.encontrarIntencionesMisa(misaId, (err, results) => {
+    encontrar2: (req, res) => {
+        const id = req.params.id; // Obtener el ID de la URL
+        console.log(id);
+        modelClase.encontrar2(id, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -91,7 +91,7 @@ module.exports = {
             }
             return res.status(200).json({
                 success: 1,
-                data: results
+                data: results[0]
             });
         });
     }
