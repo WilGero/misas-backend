@@ -7,5 +7,7 @@ router.post('/agregar', cCtcClases.agrega);
 router.delete('/borrar/:id', cCtcClases.borrar);
 router.get('/encontrar/:id', cCtcClases.encontrar);
 router.put('/actualizar', cCtcClases.actualiza);
+router.put('/actualizar-asistencia', cCtcClases.actualizaAsistencia);
+
 
 module.exports = router;

@@ -3,9 +3,8 @@ module.exports = {
     listado: callBack => {
         coneccion.query(
             `select ctc.id,ctc.nombres,ctc.apellidos,ctc.ci,ctc.fecha_nacimiento,
-            ctc.celular,ctcls.asistencia_id,ctcls.clase_id
+            ctc.celular
             from catecumeno ctc
-            left join catecumeno_clase ctcls on ctcls.catecumeno_id=ctc.id
             order by ctc.apellidos;`,
             [],
             (error, results, fields) => {
@@ -19,10 +18,10 @@ module.exports = {
     // listado de catecumenos de una clase especifica
     listado2: (idClase,callBack) => {
         coneccion.query(
-            `select ctc.id,ctc.nombres,ctc.apellidos,ctc.ci,ctc.fecha_nacimiento,
-            ctc.celular,ctcls.asistencia_id 
-            from catecumeno ctc
-            inner join catecumeno_clase ctcls on ctcls.catecumeno_id=ctc.id
+            `select ctcls.id,ctcls.catecumeno_id,ctc.nombres,ctc.apellidos,ctcls.asistencia_id, a.tipo 
+            from catecumeno_clase ctcls 
+            inner join catecumeno ctc on ctcls.catecumeno_id=ctc.id
+            left join asistencia a on ctcls.asistencia_id=a.id
             where ctcls.clase_id=?
             order by ctc.apellidos;`,
             [idClase],

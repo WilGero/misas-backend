@@ -52,6 +52,18 @@ module.exports = {
             }
         );
     },
+    actualizaAsistencia: (datos, callBack) => {
+        coneccion.query(
+            `update catecumeno_clase set asistencia_id=? where id=?`,
+            [datos.asistencia_id,datos.id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
     encontrar: (id, callBack) => {
         coneccion.query(
             `select cl.id, cl.tema,cl.fecha_hora,cl.descripcion,cl.observaciones,cl.catequesis_id,ctq.nombre from clase cl

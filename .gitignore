@@ -12,3 +12,5 @@ dist/
 logs/
 *.log
 *.tmp
+
+mysql_data
