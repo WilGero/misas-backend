@@ -33,6 +33,22 @@ module.exports = {
             }
         );
     },
+    // funcion mostrar las asistencias de un catecumeno
+    asistencias: (id,callBack) => {
+        coneccion.query(
+            `SELECT cl.tema,cl.fecha_hora, a.tipo,a.multa FROM catecumeno_clase ccl
+            INNER JOIN clase cl ON ccl.clase_id=cl.id
+            INNER JOIN asistencia a ON ccl.asistencia_id=a.id
+            WHERE ccl.catecumeno_id=?;`,
+            [id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
     agregar: (datos, callBack) => {
         coneccion.query(
             `insert into catecumeno (nombres,apellidos,ci,fecha_nacimiento,celular,celular2,direccion,padrinos,usuario_id) 
