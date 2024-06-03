@@ -19,7 +19,7 @@ module.exports = {
         coneccion.query(
             `insert into catecumeno_clase (asistencia_id,clase_id,catecumeno_id) 
             values (?, ?,?)`,
-            [datos.asistencia_id,datos.clase_id,datos.catecumeno_id],
+            [datos.asistencia_id, datos.clase_id, datos.catecumeno_id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -43,7 +43,7 @@ module.exports = {
     actualiza: (datos, callBack) => {
         coneccion.query(
             `update catecumeno_clase set asistencia_id=?,clase_id=? where catecumeno_id=?`,
-            [datos.asistencia_id,datos.clase_id,datos.catecumeno_id],
+            [datos.asistencia_id, datos.clase_id, datos.catecumeno_id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -55,7 +55,19 @@ module.exports = {
     actualizaAsistencia: (datos, callBack) => {
         coneccion.query(
             `update catecumeno_clase set asistencia_id=? where id=?`,
-            [datos.asistencia_id,datos.id],
+            [datos.asistencia_id, datos.id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    cambiarEstadoMulta: (datos, callBack) => {
+        coneccion.query(
+            `update catecumeno_clase set estado_multa=? where id = ?`,
+            [datos.estado_multa, datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);

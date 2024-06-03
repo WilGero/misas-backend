@@ -8,6 +8,6 @@ router.delete('/borrar/:id', cCtcClases.borrar);
 router.get('/encontrar/:id', cCtcClases.encontrar);
 router.put('/actualizar', cCtcClases.actualiza);
 router.put('/actualizar-asistencia', cCtcClases.actualizaAsistencia);
-
+router.put('/cambiar-estado-multa', cCtcClases.cambiarEstadoMulta);
 
 module.exports = router;
