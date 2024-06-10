@@ -36,7 +36,7 @@ module.exports = {
     // funcion mostrar las asistencias de un catecumeno
     asistencias: (id,callBack) => {
         coneccion.query(
-            `SELECT cl.tema,cl.fecha_hora, a.tipo,a.multa FROM catecumeno_clase ccl
+            `SELECT ccl.id,cl.tema,cl.fecha_hora, a.tipo,a.multa,ccl.estado_multa FROM catecumeno_clase ccl
             INNER JOIN clase cl ON ccl.clase_id=cl.id
             INNER JOIN asistencia a ON ccl.asistencia_id=a.id
             WHERE ccl.catecumeno_id=?;`,
