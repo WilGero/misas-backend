@@ -2,7 +2,7 @@ const coneccion = require("../../database");
 module.exports = {
     listado: callBack => {
         coneccion.query(
-            `SELECT ctcls.id,ctcls.asistencia_id,ctcls.clase_id,ctcls.catecumeno_id,a.tipo
+            `SELECT ctcls.id,ctcls.asistencia_id,ctcls.clase_id,ctcls.catecumeno_id,ctc.max_permiso,ctc.max_falta,a.tipo
             FROM catecumeno_clase ctcls 
             inner join asistencia a on a.id=ctcls.asistencia_id
             right join catecumeno ctc on ctc.id=ctcls.catecumeno_id;`,

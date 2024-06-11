@@ -18,7 +18,7 @@ module.exports = {
     // listado de catecumenos de una clase especifica
     listado2: (idClase,callBack) => {
         coneccion.query(
-            `select ctcls.id,ctcls.catecumeno_id,ctc.nombres,ctc.apellidos,ctcls.asistencia_id, a.tipo 
+            `select ctcls.id,ctcls.catecumeno_id,ctc.nombres,ctc.apellidos,ctcls.asistencia_id,ctc.max_permiso,ctc.max_falta, a.tipo 
             from catecumeno_clase ctcls 
             inner join catecumeno ctc on ctcls.catecumeno_id=ctc.id
             left join asistencia a on ctcls.asistencia_id=a.id
@@ -81,6 +81,18 @@ module.exports = {
             padrinos=?,usuario_id = ? where id = ?`,
             [datos.nombres,datos.apellidos, datos.ci, datos.fecha_nacimiento, 
                 datos.celular,datos.celular2,datos.direccion,datos.padrinos,datos.usuario_id,datos.id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    actualizarMaxPerFal: (datos, callBack) => {
+        coneccion.query(
+            `update catecumeno set max_permiso=?,max_falta=? where id = ?`,
+            [datos.max_permiso,datos.max_falta,datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
