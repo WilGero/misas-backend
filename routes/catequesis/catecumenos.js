@@ -10,6 +10,7 @@ router.delete('/borrar/:id', cCatecumeno.borrar);
 router.get('/encontrar/:id', cCatecumeno.encontrar);
 router.put('/actualizar', cCatecumeno.actualiza);
 router.put('/actualizar-max', cCatecumeno.actualizarMaxPerFal);
+router.put('/aumentar-per', cCatecumeno.aumentarMaxPer);
 
 
 module.exports = router;

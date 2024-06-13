@@ -101,10 +101,22 @@ module.exports = {
             }
         );
     },
+    aumentarMaxPer: (datos, callBack) => {
+        coneccion.query(
+            `update catecumeno set max_permiso=? where id = ?`,
+            [datos.max_permiso,datos.id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
     encontrar: (id, callBack) => {
         coneccion.query(
             `select ctc.id,ctc.nombres,ctc.apellidos,ctc.ci,ctc.fecha_nacimiento,ctc.celular,ctc.celular2,
-            ctc.direccion,ctc.padrinos,ctc.usuario_id,ctcl.asistencia_id
+            ctc.direccion,ctc.padrinos,ctc.max_permiso,ctc.usuario_id,ctcl.asistencia_id
             from catecumeno ctc
             left join catecumeno_clase ctcl on ctcl.catecumeno_id=ctc.id
             where ctc.id=?;`,
