@@ -104,7 +104,7 @@ module.exports = {
             }
             return res.status(200).json({
                 success: 1,
-                data: results[0]//hacer esta accion debido a la respuesta del procedimietno almacenado
+                data: results//hacer esta accion debido a la respuesta del procedimietno almacenado
             });
         });
     }

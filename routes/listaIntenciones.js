@@ -5,7 +5,6 @@ const auth = require('../auth');
 
 router.get('/listado',cLista.listado);
 router.get('/listar-ultimo',cLista.listarUltimo);
-
 router.post('/agregar', cLista.agrega);
 router.delete('/borrar/:id', cLista.borrar);
 router.patch('/actualizar-estado', cLista.actualizaEstadoPago);

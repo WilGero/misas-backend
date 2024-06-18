@@ -35,7 +35,7 @@ module.exports = {
                 });
             }
             // Aquí deberías tener los detalles de tu artículo en 'results' desde la base de datos
-            const itemDetails = results[0];
+            const itemDetails = results;
             // Ajusta esto según la estructura de tu modelo
             console.log('esta es una intencion: ' + itemDetails);
             // Llama a la función createSession y pasa los detalles del artículo
