@@ -84,7 +84,7 @@ module.exports = {
     },
     encontrar: (id, callBack) => {
         coneccion.query(
-            `select i.id,i.razon,i.descripcion,ti.tipo,ti.costo from lista_intenciones li 
+            `select i.misa_id,i.lista_id,i.id,i.razon,i.descripcion,ti.tipo,ti.costo from lista_intenciones li 
             inner join intencion i on i.lista_id=li.id
             inner join tipo_intencion ti on i.tipo_intencion_id=ti.id
             where li.id=?;`,

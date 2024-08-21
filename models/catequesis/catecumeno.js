@@ -5,6 +5,7 @@ module.exports = {
             `select ctc.id,ctc.nombres,ctc.apellidos,ctc.ci,ctc.fecha_nacimiento,
             ctc.celular
             from catecumeno ctc
+            where ctc.estado=1
             order by ctc.apellidos;`,
             [],
             (error, results, fields) => {

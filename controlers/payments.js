@@ -71,7 +71,7 @@ module.exports = {
                 line_items:lineItems,
                 mode: 'payment',
                 success_url: 'http://localhost:8080/intencion-pagada/'+itemDetails[0].lista_id,
-                cancel_url: 'http://localhost:8080/listado-intenciones/'+ itemDetails[0].tipo_misa_id+'/'+itemDetails[0].lista_id,
+                cancel_url: 'http://localhost:8080/listado-intenciones/'+ itemDetails[0].misa_id+'/'+itemDetails[0].lista_id,
             });
 
             return res.json(session);
