@@ -24,7 +24,7 @@ module.exports = {
             inner join catecumeno ctc on ctcls.catecumeno_id=ctc.id
             left join asistencia a on ctcls.asistencia_id=a.id
             where ctcls.clase_id=?
-            order by ctc.apellidos;`,
+            order by ctc.apellidos ;`,
             [idClase],
             (error, results, fields) => {
                 if (error) {
@@ -37,10 +37,12 @@ module.exports = {
     // funcion mostrar las asistencias de un catecumeno
     asistencias: (id,callBack) => {
         coneccion.query(
-            `SELECT ccl.id,cl.tema,cl.fecha_hora, a.tipo,a.multa,ccl.estado_multa FROM catecumeno_clase ccl
+            `SELECT ccl.id,c.nombres, cl.tema,cl.fecha_hora, a.tipo,a.multa,ccl.estado_multa FROM catecumeno_clase ccl
             INNER JOIN clase cl ON ccl.clase_id=cl.id
             INNER JOIN asistencia a ON ccl.asistencia_id=a.id
-            WHERE ccl.catecumeno_id=?;`,
+            INNER JOIN catecumeno c ON ccl.catecumeno_id=c.id
+            WHERE ccl.catecumeno_id=?
+            order by ccl.estado_multa,a.multa desc,cl.fecha_hora desc;`,
             [id],
             (error, results, fields) => {
                 if (error) {
