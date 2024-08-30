@@ -1,7 +1,7 @@
-const modelAsistencia = require('../../models/catequesis/examen');
+const modelExamen = require('../../models/catequesis/examen');
 module.exports = {
     listado: (req, res) => {
-        modelAsistencia.listado((err, results) => {
+        modelExamen.listado((err, results) => {
             if (err) {
                 console.log(err);
                 return;
@@ -15,7 +15,7 @@ module.exports = {
     },
     agrega: (req, res) => {
         const body = req.body;
-        modelAsistencia.agregar(body, (err, results) => {
+        modelExamen.agregar(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -31,7 +31,7 @@ module.exports = {
     },
     borrar: (req, res) => {
         const id = req.params.id;
-        modelAsistencia.borrar(id, (err, results) => {
+        modelExamen.borrar(id, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -47,7 +47,7 @@ module.exports = {
     },
     actualiza: (req, res) => {
         const body = req.body;
-        modelAsistencia.actualiza(body, (err, results) => {
+        modelExamen.actualiza(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -64,7 +64,7 @@ module.exports = {
     encontrar: (req, res) => {
         const id = req.params.id; // Obtener el ID de la URL
         console.log(id);
-        modelAsistencia.encontrar(id, (err, results) => {
+        modelExamen.encontrar(id, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -78,22 +78,4 @@ module.exports = {
             });
         });
     },
-    encontrarIntencionesMisa: (req, res) => {
-        const misaId = req.params.id; // Obtener el ID de la URL
-        console.log(misaId);
-        modelAsistencia.encontrarIntencionesMisa(misaId, (err, results) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).json({
-                    success: 0,
-                    message: "Error en la Base de Datos"
-                });
-            }
-            return res.status(200).json({
-                success: 1,
-                data: results
-            });
-        });
-    }
-
 };
