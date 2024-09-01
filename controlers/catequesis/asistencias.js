@@ -1,4 +1,4 @@
-const modelAsistencia = require('../../models/catequesis/examen');
+const modelAsistencia = require('../../models/catequesis/asistencia');
 module.exports = {
     listado: (req, res) => {
         modelAsistencia.listado((err, results) => {
