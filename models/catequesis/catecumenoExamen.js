@@ -75,9 +75,8 @@ module.exports = {
     },
     encontrar: (id, callBack) => {
         coneccion.query(
-            `select cl.id, cl.tema,cl.fecha_hora,cl.descripcion,cl.observaciones,cl.catequesis_id,ctq.nombre from clase cl
-            inner join catequesis ctq on cl.catequesis_id=ctq.id 
-            where cl.id=?;`,
+            `select * from catecumeno_examen ce
+            where ce.examen_id=?;`,
             [id],
             (error, results, fields) => {
                 if (error) {

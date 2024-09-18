@@ -34,6 +34,22 @@ module.exports = {
             }
         );
     },
+    listadoExamen: (idExamen,callBack) => {
+        coneccion.query(
+            `select ctex.catecumeno_id,ctc.nombres,ctc.apellidos,ctex.nota 
+            from catecumeno_examen ctex 
+            inner join catecumeno ctc on ctex.catecumeno_id=ctc.id
+            where ctex.examen_id=?
+            order by ctc.apellidos ;`,
+            [idExamen],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
     // funcion mostrar las asistencias de un catecumeno
     asistencias: (id,callBack) => {
         coneccion.query(

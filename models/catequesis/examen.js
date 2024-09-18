@@ -16,7 +16,7 @@ module.exports = {
         coneccion.query(
             `insert into examen (titulo,fecha) 
             values (?,?)`,
-            [datos.titulo,datos.fecha],
+            [datos.titulo, datos.fecha],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -40,7 +40,7 @@ module.exports = {
     actualiza: (datos, callBack) => {
         coneccion.query(
             `update examen set titulo=?,fecha=? where id = ?`,
-            [datos.titulo,datos.fecha,datos.id],
+            [datos.titulo, datos.fecha, datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -61,6 +61,7 @@ module.exports = {
             }
         );
     },
+
 
 
 }

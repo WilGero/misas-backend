@@ -27,6 +27,20 @@ module.exports = {
             });
         });
     },
+    listadoExamen: (req, res) => {
+        const id = req.params.id; // Obtener el ID de la URL
+        modelCatecumeno.listadoExamen(id,(err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(results);
+            return res.json({
+                success: 1,
+                data: results
+            });
+        });
+    },
     asistencias: (req, res) => {
         const id = req.params.id; // Obtener el ID de la URL
         modelCatecumeno.asistencias(id,(err, results) => {

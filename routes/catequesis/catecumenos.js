@@ -4,6 +4,7 @@ const cCatecumeno = require("../../controlers/catequesis/catecumenos");
 const auth = require('../../auth');
 router.get('/listado', cCatecumeno.listado);
 router.get('/listado/:id', cCatecumeno.listado2);
+router.get('/listado-examen/:id', cCatecumeno.listadoExamen);
 router.get('/asistencias/:id',cCatecumeno.asistencias);
 router.post('/agregar', cCatecumeno.agrega);
 router.delete('/borrar/:id', cCatecumeno.borrar);
