@@ -3,6 +3,7 @@ const router = express.Router();
 const cCtcExamenes = require("../../controlers/catequesis/catecumenosExamen");
 const auth = require('../../auth');
 router.get('/listado', cCtcExamenes.listado);
+router.get('/listado-catecumenos', cCtcExamenes.listadoCatecumenos);
 router.post('/agregar', cCtcExamenes.agrega);
 router.delete('/borrar/:examen_id/:catecumeno_id', cCtcExamenes.borrar);
 router.get('/encontrar/:id', cCtcExamenes.encontrar);

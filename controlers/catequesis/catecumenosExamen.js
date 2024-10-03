@@ -13,6 +13,19 @@ module.exports = {
             });
         });
     },
+    listadoCatecumenos: (req, res) => {
+        modelCtcExamen.listadoCatecumenos((err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log(results);
+            return res.json({
+                success: 1,
+                data: results
+            });
+        });
+    },
     agrega: (req, res) => {
         const body = req.body;
         modelCtcExamen.agregar(body, (err, results) => {

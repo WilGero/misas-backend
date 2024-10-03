@@ -12,6 +12,22 @@ module.exports = {
             }
         );
     },
+    listadoCatecumenos: callBack => {
+        coneccion.query(
+            `SELECT c.id, c.apellidos, c.nombres,e.titulo,e.fecha, ce.nota
+             from catecumeno_examen ce
+            inner join catecumeno c on ce.catecumeno_id=c.id
+            inner join examen e on ce.examen_id=e.id
+            order by c.apellidos,c.id,e.fecha;`,
+            [],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
     agregar: (datos, callBack) => {
         coneccion.query(
             `insert into catecumeno_examen (nota,catecumeno_id,examen_id) 

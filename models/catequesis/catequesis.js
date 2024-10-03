@@ -13,23 +13,6 @@ module.exports = {
             }
         );
     },
-    asistenciaCatecumenos: callBack => {
-        coneccion.query(
-            `SELECT c.id,c.nombres,c.apellidos,a.tipo,a.multa,cl.tema,cl.fecha_hora, ccl.estado_multa from catecumeno_clase ccl 
-            INNER JOIN catecumeno c ON ccl.catecumeno_id=c.id 
-            INNER JOIN asistencia a ON ccl.asistencia_id=a.id 
-            INNER JOIN clase cl ON ccl.clase_id=cl.id 
-            WHERE ccl.asistencia_id!=1 and ccl.estado_multa=0 
-            ORDER BY c.apellidos,c.nombres;`,
-            [],
-            (error, results, fields) => {
-                if (error) {
-                    callBack(error);
-                }
-                return callBack(null, results);
-            }
-        );
-    },
     agregar: (datos, callBack) => {
         coneccion.query(
             `insert into catequesis (nombre,requisitos) 

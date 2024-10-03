@@ -2,7 +2,8 @@ const coneccion = require("../../database");
 module.exports = {
     listado: callBack => {
         coneccion.query(
-            `select * from examen;`,
+            `select * from examen
+            order by fecha desc;`,
             [],
             (error, results, fields) => {
                 if (error) {

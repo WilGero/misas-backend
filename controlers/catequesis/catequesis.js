@@ -13,19 +13,6 @@ module.exports = {
             });
         });
     },
-    asistenciaCatecumenos: (req, res) => {
-        modelCatequesis.asistenciaCatecumenos((err, results) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.log(results);
-            return res.json({
-                success: 1,
-                data: results
-            });
-        });
-    },
     agrega: (req, res) => {
         const body = req.body;
         modelCatequesis.agregar(body, (err, results) => {
