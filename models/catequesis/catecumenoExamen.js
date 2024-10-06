@@ -14,7 +14,7 @@ module.exports = {
     },
     listadoCatecumenos: callBack => {
         coneccion.query(
-            `SELECT c.id, c.apellidos, c.nombres,e.titulo,e.fecha, ce.nota
+            `SELECT c.id, c.apellidos, c.nombres,e.titulo,e.fecha, ce.nota,ce.puntos,LEAST(ce.nota + ce.puntos, 100) AS nota_final
              from catecumeno_examen ce
             inner join catecumeno c on ce.catecumeno_id=c.id
             inner join examen e on ce.examen_id=e.id
@@ -30,8 +30,32 @@ module.exports = {
     },
     agregar: (datos, callBack) => {
         coneccion.query(
-            `insert into catecumeno_examen (nota,catecumeno_id,examen_id) 
-            values (?, ?,?)`,
+            `insert into catecumeno_examen (nota,puntos,nota_final,catecumeno_id,examen_id) 
+            values (?, ?,?,?,?)`,
+            [datos.nota, datos.puntos, datos.nota_final, datos.catecumeno_id, datos.examen_id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    borrar: (catecumeno_id, examen_id, callBack) => {
+        coneccion.query(
+            `delete from catecumeno_examen where catecumeno_id=? AND examen_id=?`,
+            [catecumeno_id, examen_id],
+            (error, results, fields) => {
+                if (error) {
+                    callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    actualizaNota: (datos, callBack) => {
+        coneccion.query(
+            `update catecumeno_examen set nota=? where catecumeno_id=? AND examen_id=?`,
             [datos.nota, datos.catecumeno_id, datos.examen_id],
             (error, results, fields) => {
                 if (error) {
@@ -41,10 +65,10 @@ module.exports = {
             }
         );
     },
-    borrar: (catecumeno_id,examen_id, callBack) => {
+    actualizaPuntos: (datos, callBack) => {
         coneccion.query(
-            `delete from catecumeno_examen where catecumeno_id=? AND examen_id=?`,
-            [catecumeno_id,examen_id],
+            `update catecumeno_examen set puntos=? where catecumeno_id=? AND examen_id=?`,
+            [datos.puntos, datos.catecumeno_id, datos.examen_id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -53,22 +77,10 @@ module.exports = {
             }
         );
     },
-    actualiza: (datos, callBack) => {
+    actualizaNotaFinal: (datos, callBack) => {
         coneccion.query(
-            `update catecumeno_examen set nota=? where catecumeno_id=? AND examen_id=?`,
-            [datos.nota, datos.catecumeno_id, datos.examen_id ],
-            (error, results, fields) => {
-                if (error) {
-                    callBack(error);
-                }
-                return callBack(null, results);
-            }
-        );
-    },
-    actualizaAsistencia: (datos, callBack) => {
-        coneccion.query(
-            `update catecumeno_examen set asistencia_id=? where id=?`,
-            [datos.asistencia_id, datos.id],
+            `update catecumeno_examen set nota_final=? where catecumeno_id=? AND examen_id=?`,
+            [datos.nota_final, datos.catecumeno_id, datos.examen_id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);

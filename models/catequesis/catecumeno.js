@@ -2,7 +2,7 @@ const coneccion = require("../../database");
 module.exports = {
     listado: callBack => {
         coneccion.query(
-            `select ctc.id,ctc.nombres,ctc.apellidos,ctc.ci,ctc.fecha_nacimiento,
+            `select ctc.id,ctc.nombres,ctc.apellidos,ctc.ci,ctc.fecha_nacimiento,ctc.max_permiso,
             ctc.celular
             from catecumeno ctc
             where ctc.estado=1
@@ -17,7 +17,7 @@ module.exports = {
         );
     },
     // listado de catecumenos de una clase especifica
-    listado2: (idClase,callBack) => {
+    listado2: (idClase, callBack) => {
         coneccion.query(
             `select ctcls.id,ctcls.catecumeno_id,ctc.nombres,ctc.apellidos,ctcls.asistencia_id,ctc.max_permiso,ctc.max_falta, a.tipo 
             from catecumeno_clase ctcls 
@@ -34,9 +34,9 @@ module.exports = {
             }
         );
     },
-    listadoExamen: (idExamen,callBack) => {
+    listadoExamen: (idExamen, callBack) => {
         coneccion.query(
-            `select ctex.catecumeno_id,ctc.nombres,ctc.apellidos,ctex.nota 
+            `select ctex.catecumeno_id,ctc.nombres,ctc.apellidos,ctex.nota,ctex.puntos,LEAST(ctex.nota + ctex.puntos, 100) AS nota_final 
             from catecumeno_examen ctex 
             inner join catecumeno ctc on ctex.catecumeno_id=ctc.id
             where ctex.examen_id=?
@@ -51,7 +51,7 @@ module.exports = {
         );
     },
     // funcion mostrar las asistencias de un catecumeno
-    asistencias: (id,callBack) => {
+    asistencias: (id, callBack) => {
         coneccion.query(
             `SELECT ccl.id,c.nombres, cl.tema,cl.fecha_hora, a.tipo,a.multa,ccl.estado_multa FROM catecumeno_clase ccl
             INNER JOIN clase cl ON ccl.clase_id=cl.id
@@ -72,8 +72,8 @@ module.exports = {
         coneccion.query(
             `insert into catecumeno (nombres,apellidos,ci,fecha_nacimiento,celular,celular2,direccion,padrinos,usuario_id) 
             values (?, ? , ? , ?,?,?,?,?,?)`,
-            [datos.nombres,datos.apellidos, datos.ci, datos.fecha_nacimiento, 
-                datos.celular,datos.celular2,datos.direccion,datos.padrinos,datos.usuario_id],
+            [datos.nombres, datos.apellidos, datos.ci, datos.fecha_nacimiento,
+            datos.celular, datos.celular2, datos.direccion, datos.padrinos, datos.usuario_id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -98,8 +98,8 @@ module.exports = {
         coneccion.query(
             `update catecumeno set nombres=?,apellidos=?,ci=?,fecha_nacimiento=?,celular=?,celular2=?,direccion=?,
             padrinos=?,usuario_id = ? where id = ?`,
-            [datos.nombres,datos.apellidos, datos.ci, datos.fecha_nacimiento, 
-                datos.celular,datos.celular2,datos.direccion,datos.padrinos,datos.usuario_id,datos.id],
+            [datos.nombres, datos.apellidos, datos.ci, datos.fecha_nacimiento,
+            datos.celular, datos.celular2, datos.direccion, datos.padrinos, datos.usuario_id, datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -111,7 +111,7 @@ module.exports = {
     actualizarMaxPerFal: (datos, callBack) => {
         coneccion.query(
             `update catecumeno set max_permiso=?,max_falta=? where id = ?`,
-            [datos.max_permiso,datos.max_falta,datos.id],
+            [datos.max_permiso, datos.max_falta, datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -123,7 +123,7 @@ module.exports = {
     aumentarMaxPer: (datos, callBack) => {
         coneccion.query(
             `update catecumeno set max_permiso=? where id = ?`,
-            [datos.max_permiso,datos.id],
+            [datos.max_permiso, datos.id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);

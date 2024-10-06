@@ -59,9 +59,25 @@ module.exports = {
             });
         });
     },
-    actualiza: (req, res) => {
+    actualizaNota: (req, res) => {
         const body = req.body;
-        modelCtcExamen.actualiza(body, (err, results) => {
+        modelCtcExamen.actualizaNota(body, (err, results) => {
+            if (err) {0
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Error en la Base de Datos"
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results
+            });
+        });
+    },
+    actualizaPuntos: (req, res) => {
+        const body = req.body;
+        modelCtcExamen.actualizaPuntos(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -75,9 +91,9 @@ module.exports = {
             });
         });
     },
-    actualizaAsistencia: (req, res) => {
+    actualizaNotaFinal: (req, res) => {
         const body = req.body;
-        modelCtcExamen.actualizaAsistencia(body, (err, results) => {
+        modelCtcExamen.actualizaNotaFinal(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
