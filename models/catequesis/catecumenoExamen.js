@@ -30,9 +30,9 @@ module.exports = {
     },
     agregar: (datos, callBack) => {
         coneccion.query(
-            `insert into catecumeno_examen (nota,puntos,nota_final,catecumeno_id,examen_id) 
-            values (?, ?,?,?,?)`,
-            [datos.nota, datos.puntos, datos.nota_final, datos.catecumeno_id, datos.examen_id],
+            `insert into catecumeno_examen (nota,puntos,catecumeno_id,examen_id) 
+            values (?, ?,?,?)`,
+            [datos.nota, datos.puntos, datos.catecumeno_id, datos.examen_id],
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
