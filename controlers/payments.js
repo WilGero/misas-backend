@@ -70,8 +70,8 @@ module.exports = {
             const session = await stripe.checkout.sessions.create({
                 line_items:lineItems,
                 mode: 'payment',
-                success_url: 'http://localhost:8080/intencion-pagada/'+itemDetails[0].lista_id,
-                cancel_url: 'http://localhost:8080/listado-intenciones/'+ itemDetails[0].misa_id+'/'+itemDetails[0].lista_id,
+                success_url: 'https://parroquia-vinto.netlify.app/intencion-pagada/'+itemDetails[0].lista_id,
+                cancel_url: 'https://parroquia-vinto.netlify.app/listado-intenciones/'+ itemDetails[0].misa_id+'/'+itemDetails[0].lista_id,
             });
 
             return res.json(session);
